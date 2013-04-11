@@ -88,13 +88,14 @@ class Database
 			if (t - Date.today.to_time) > 0
 				hits += 1
 			end
-
-			# if (Time.now - t) < 10.day
-			# 	hits += 1
-			# end
+			
 		end
 		
 		return hits
+	end
+
+	def get_code_data(code)
+		@db.query("SELECT path from logs WHERE code = ?", code)
 	end
 
 	def insert_data(data)
