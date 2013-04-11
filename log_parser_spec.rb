@@ -1,5 +1,6 @@
 
 require_relative 'log_parser'
+require_relative 'log_database'
 
 describe 'LogParser' do
 

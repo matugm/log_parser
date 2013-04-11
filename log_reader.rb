@@ -1,5 +1,6 @@
 
 require_relative 'log_parser'
+require_relative 'log_database'
 require 'sinatra'
 require 'uri'
 
@@ -33,6 +34,5 @@ end
 
 get '/:stats' do
 	stats = db.stats(params[:stats])
-
 	erb :index, :locals => { :stats => stats, :data_types => data_types, :db => db, :time => time } 
 end

@@ -1,0 +1,63 @@
+
+<style type="text/css" title="currentStyle">
+	@import "/demo_table.css";
+
+	#demo {
+		width: 40%;
+		margin: auto;
+	}
+
+	#table {
+		margin: 0 auto;
+		clear: both;
+	}
+
+	#menu {
+		margin: auto;
+		width: 90%;
+	}
+
+</style>
+
+<script type="text/javascript" language="javascript" src="/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('#table').dataTable( {
+			"aaSorting": [[ 1, "desc" ]]
+		} );
+	} );
+</script>
+
+<div id="demo">
+	<div id="menu">
+
+<% data_types.each do |type| %>
+	<a class='css3button' href='/<%= type %>'><%= type %></a>   
+<% end %>
+
+	</div>
+<br />
+<table border=0 cellpadding=5 id="table">
+
+<thead>
+	<tr>
+		<th><%= params[:stats] %></th>
+		<th>count</th>
+	</tr>
+</thead>
+
+<tbody>
+
+<% stats.each do |k, v| %>
+<%	next if params[:stats] == "path" && k.filter? %>
+<%	next if k.nil? || k.empty? %>
+	<tr><td><%= escape_html(k) %></td>
+		<td><%= escape_html(v) %></td>
+<% end %>
+
+</tbody>
+</table></div>
+
+<br> Unique hits today: <%= db.unique_hits %>
+<br> Generated in: <%= Time.now - time %>
