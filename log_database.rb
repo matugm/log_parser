@@ -18,12 +18,8 @@ class Database
 	end
 
 	def stats(type)
-		query = @db.execute("SELECT #{type} FROM logs")
-		query = query.flatten
-
-		unique_items = query.uniq
-		item_count = unique_items.map { |item| [item, query.count(item)] }
-		item_count = Hash[item_count]  # Convert nested array pairs into hash
+		query = @db.execute("SELECT #{type}, count(*) FROM logs GROUP BY #{type}")
+		item_count = Hash[query]  # Convert nested array pairs into hash
 	end
 
 	def unique_hits
