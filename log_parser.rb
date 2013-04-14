@@ -41,8 +41,13 @@ class LogParser
 		return log_parts
 	end
 
-	def parse_file
-		@parsed_log = File.foreach(@file).map { |log_line| parse_line(log_line) }
+	def parse_file(pointer = 0)
+		 File.open(@file) do |file|
+		 	file.pos = pointer
+		 	@parsed_log = file.map { |log_line| parse_line(log_line) }
+		 	
+		 	return file.pos
+		 end
 	end
 
 	attr_reader :parsed_log
