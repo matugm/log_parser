@@ -27,12 +27,14 @@ data_types = %w{ user_agent ip code path method }
 
 get '/code/:num' do
 	data = db.get_code_data(params[:num])
-
 	data = data.to_a.uniq
+	
 	erb :index, :locals => { :stats => data, :data_types => data_types, :db => db, :time => time } 
 end
 
 get '/:stats' do
+	return "" unless data_types.include? params[:stats]
 	stats = db.stats(params[:stats])
+
 	erb :index, :locals => { :stats => stats, :data_types => data_types, :db => db, :time => time } 
 end

@@ -10,8 +10,8 @@ describe 'LogParser' do
 	end
 
 	it "Should have the correct number of lines" do
-		results = @parser.parse_file
-		results.length.should > 10
+		results = @parser.parse_file(0)
+		results.should > 10
 	end
 
 	it "should parse the IP correctly" do
@@ -63,7 +63,7 @@ describe 'LogParser' do
 	end
 
 	it "should insert and return data" do
-		@parser.parse_file
+		@parser.parse_file(0)
 		db = Database.new
 		db.insert_data(@parser.parsed_log)
 		db.stats("user_agent").size.should > 0

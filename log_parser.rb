@@ -1,8 +1,4 @@
 
-# '78.40.124.16 - - [01/Apr/2013:06:59:33 +0000] 
-# "GET / HTTP/1.0" 200 25246 "-" 
-# "Pingdom.com_bot_version_1.4_(http://www.pingdom.com)"'
-
 require 'date'
 require 'time'
 
@@ -41,13 +37,14 @@ class LogParser
 		return log_parts
 	end
 
-	def parse_file(pointer = 0)
-		 File.open(@file) do |file|
-		 	file.pos = pointer
-		 	@parsed_log = file.map { |log_line| parse_line(log_line) }
-		 	
-		 	return file.pos
-		 end
+	def parse_file(pointer)
+		File.open(@file) do |file|
+			pointer = 0 if file.size < pointer
+			file.pos = pointer
+
+			@parsed_log = file.map { |log_line| parse_line(log_line) }
+			return file.pos
+		end
 	end
 
 	attr_reader :parsed_log

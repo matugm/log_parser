@@ -6,11 +6,12 @@ file = "/tmp/access.log"
 pointer = 0
 
 if (File.exist? "file_pointer")
-	File.open("file_pointer","r") { |file| pointer = file.read }
+	File.open("file_pointer","r") { |file| pointer = file.read.to_i }
 end
 
 @parser = LogParser.new(file)
-new_position = @parser.parse_file(pointer.to_i)
+new_position = @parser.parse_file(pointer)
+
 data = @parser.parsed_log
 
 db = Database.new
