@@ -23,7 +23,7 @@ end
 
 db = Database.new
 time = Time.now
-data_types = %w{ user_agent ip code path method }
+data_types = %w{ user_agent ip code path method referer }
 
 get '/code/:num' do
 	data = db.get_code_data(params[:num])

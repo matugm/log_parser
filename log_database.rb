@@ -13,8 +13,9 @@ class Database
 
 	def init_db
 		@db.execute("CREATE TABLE logs (id integer PRIMARY KEY AUTOINCREMENT," +
-		"ip varchar(20), time DATETIME, method varchar(50), path text(1000),"+
-		"httpver varchar(50), code varchar(11), size varchar(50), user_agent text(500))")
+		"ip varchar(20), time DATETIME, method varchar(50), path text(500)," +
+		"httpver varchar(50), code varchar(11), size varchar(50),referer text(500)," +
+		"user_agent text(500))")
 	end
 
 	def stats(type)
@@ -52,8 +53,8 @@ class Database
 		data.each do |log_line|
 			next if log_line['ip'].nil?
 
-			query = "INSERT INTO logs (ip, time, method, path, httpver, code, size, user_agent) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
-			fields = %w{ ip time method path httpver code size user_agent }
+			query = "INSERT INTO logs (ip, time, method, path, httpver, code, size, referer, user_agent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+			fields = %w{ ip time method path httpver code size referer user_agent }
 			values = fields.map	{ |field| log_line[field] }
 
 			@db.execute(query, values)

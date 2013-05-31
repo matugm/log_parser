@@ -21,10 +21,10 @@ class LogParser
 
 	def parse_line(log_line)
 		log_parts = {}
-		log_line = log_line.split(/^(\S+) \S+ \S+ \[([^\]]+)\] "([A-Z]+) (\/\S*) ([^"]*)" (\d+) (\d+) "(?:[^"]*)" "([^"]*)"$/)
+		log_line = log_line.split(/^(\S+) \S+ \S+ \[([^\]]+)\] "([A-Z]+) (\/\S*) ([^"]*)" (\d+) (\d+) "([^"]*)" "([^"]*)"$/)
 
 		if log_line
-			fields = %w{ ip time method path httpver code size user_agent }
+			fields = %w{ ip time method path httpver code size referer user_agent }
 			fields.each_with_index { |field, count| log_parts[field] = log_line[count+1] }
 		end
 
