@@ -23,15 +23,9 @@ class LogParser
 		log_parts = {}
 		log_line = log_line.split(/^(\S+) \S+ \S+ \[([^\]]+)\] "([A-Z]+) (\/\S*) ([^"]*)" (\d+) (\d+) "(?:[^"]*)" "([^"]*)"$/)
 
-		if log_line != nil
-			log_parts['ip'] = log_line[1]
-			log_parts['time'] = log_line[2]
-			log_parts['method'] = log_line[3]
-			log_parts['path'] = log_line[4]
-			log_parts['httpver'] = log_line[5]
-			log_parts['code'] = log_line[6]
-			log_parts['size'] = log_line[7]
-			log_parts['user_agent'] = log_line[8]
+		if log_line
+			fields = %w{ ip time method path httpver code size user_agent }
+			fields.each_with_index { |field, count| log_parts[field] = log_line[count+1] }
 		end
 
 		return log_parts
