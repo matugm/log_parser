@@ -53,7 +53,8 @@ class Database
 			next if log_line['ip'].nil?
 
 			query = "INSERT INTO logs (ip, time, method, path, httpver, code, size, user_agent) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
-			values = log_line['ip'],  log_line['time'], log_line['method'],  log_line['path'],  log_line['httpver'],  log_line['code'], log_line['size'],  log_line['user_agent']
+			fields = %w{ ip time method path httpver code size user_agent }
+			values = fields.map	{ |field| log_line[field] }
 
 			@db.execute(query, values)
 		end
