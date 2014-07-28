@@ -25,6 +25,10 @@ db = Database.new
 time = Time.now
 data_types = %w{ user_agent ip code path method referer }
 
+get '/' do
+  redirect to('/path')
+end
+
 get '/code/:num' do
 	data = db.get_code_data(params[:num])
 	data = data.to_a.uniq
@@ -33,7 +37,7 @@ get '/code/:num' do
 end
 
 get '/:stats' do
-	return "" unless data_types.include? params[:stats]
+	return "Invalid stat type" unless data_types.include? params[:stats]
 	stats = db.stats(params[:stats])
 
 	erb :index, :locals => { :stats => stats, :data_types => data_types, :db => db, :time => time } 
