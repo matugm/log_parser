@@ -30,7 +30,7 @@ class LogParser
 		return log_parts
 	end
 
-	def parse_file(pointer)
+	def parse_file(pointer = 0)
 		File.open(@file) do |file|
 			pointer = 0 if file.size < pointer
 			file.pos = pointer

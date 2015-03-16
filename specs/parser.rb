@@ -8,7 +8,7 @@ describe 'LogParser' do
   end
 
   it "Should have the correct number of lines" do
-    results = @parser.parse_file(0)
+    results = @parser.parse_file
     results.should > 10
   end
 
