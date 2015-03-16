@@ -20,5 +20,3 @@ db.insert_data(data)
 puts "Database updated... #{data.size} new records."
 
 File.open("file_pointer", "w") { |file| file.write new_position  }
-
-# 2. Guardar los hits unicos diarios de todo el mes.
