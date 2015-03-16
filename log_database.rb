@@ -1,12 +1,10 @@
-
 require 'sqlite3'
-
 
 class Database
 
 	def initialize
 		@db = SQLite3::Database.new("logs.db")
-	
+
 		exist = @db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='logs'")
 		init_db if exist.empty?
 	end
@@ -37,9 +35,9 @@ class Database
 			if (t - Date.today.to_time) > 0
 				hits += 1
 			end
-			
+
 		end
-		
+
 		return hits
 	end
 
