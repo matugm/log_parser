@@ -21,6 +21,7 @@ class LogParser
 	def parse_line(log_line)
 		log_parts = {}
 		log_line = log_line.split(/^(\S+) \S+ \S+ \[([^\]]+)\] "([A-Z]+) (\/\S*) ([^"]*)" (\d+) (\d+) "([^"]*)" "([^"]*)"$/)
+    raise ArgumentError, "Invalid log format" unless log_line.size == 10
 
 		if log_line
 			fields = %w{ ip time method path httpver code size referer user_agent }
