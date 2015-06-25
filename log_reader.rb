@@ -7,10 +7,10 @@ require 'uri'
 class String
   def filter?
     encoded = URI.encode(self)
-    path = URI(encoded).path
+    path 	  = URI(encoded).path
 
     filter_paths = %w{ /wp-content /wp-admin /wp-includes }
-    filter_paths.any? { |filter|   path.start_with? filter }
+    filter_paths.any? { |filter| path.start_with? filter }
   end
 end
 

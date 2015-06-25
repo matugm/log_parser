@@ -32,10 +32,7 @@ class Database
 
       t = Time.parse(time.sub(":", " "))
 
-      if (t - Date.today.to_time) > 0
-        hits += 1
-      end
-
+      hits += 1 if (t - Date.today.to_time) > 0
     end
 
     return hits
@@ -53,7 +50,7 @@ class Database
 
       query = "INSERT INTO logs (ip, time, method, path, httpver, code, size, referer, user_agent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
       fields = %w{ ip time method path httpver code size referer user_agent }
-      values = fields.map  { |field| log_line[field] }
+      values = fields.map { |field| log_line[field] }
 
       @db.execute(query, values)
     end
