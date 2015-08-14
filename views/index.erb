@@ -1,22 +1,22 @@
 
 <style type="text/css" title="currentStyle">
-	@import "jquery.dataTables.min.css";
-  @import "buttons.css";
+@import "jquery.dataTables.min.css";
+@import "buttons.css";
 
-	#demo {
-		width: 40%;
-		margin: auto;
-	}
+#demo {
+	width: 40%;
+	margin: auto;
+}
 
-	#table {
-		margin: 0 auto;
-		clear: both;
-	}
+#table {
+	margin: 0 auto;
+	clear: both;
+}
 
-	#menu {
-		margin: auto;
-    width: 700px;
-	}
+#menu {
+	margin: auto;
+	width: 700px;
+}
 
 </style>
 
@@ -24,42 +24,45 @@
 <script type="text/javascript" language="javascript" src="/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#table').dataTable( {
-			"aaSorting": [[ 1, "desc" ]]
-		} );
-	} );
+$(document).ready(function() {
+	$('#table').dataTable({
+		"aaSorting": [[ 1, "desc" ]]
+	});
+});
 </script>
 
 <div id="demo">
 	<div id="menu">
 
-<% data_types.each do |type| %>
-	<a class='css3button' href='/<%= type %>'><%= type %></a>   
-<% end %>
+		<% data_types.each do |type| %>
+		<a class='css3button' href='/<%= type %>'><%= type %></a>
+		<% end %>
 
 	</div>
-<br />
-<table id="table" class="display">
+	<br />
+	<table id="table" class="display">
 
-<thead>
-	<tr>
-		<th><%= params[:stats] %></th>
-		<th>count</th>
-	</tr>
-</thead>
+		<thead>
+			<tr>
+				<th><%= params[:stats] %></th>
+				<th>count</th>
+			</tr>
+		</thead>
 
-<tbody>
+		<tbody>
 
-<% stats.each do |k, v| %>
-<%	next if params[:stats] == "path" && k.filter? %>
-<%	next if k.nil? || k.empty? %>
-	<tr><td><%= escape_html(k) %></td>
-		<td><%= escape_html(v) %></td>
-<% end %>
+			<% stats.each do |key, v| %>
+				<%	next if params[:stats] == "path" && key.filter? %>
+				<%	next if key.nil? || key.empty? %>
+				<tr>
+					<td><%= escape_html(key) %></td>
+					<td><%= escape_html(v) %></td>
+				</tr>
+			<% end %>
 
-</tbody>
-</table></div>
+		</tbody>
+		</table>
+	</div>
 
-<br> Unique hits today: <%= db.unique_hits %>
-<br> Generated in: <%= Time.now - time %>
+	<br> Unique hits today: <%= db.unique_hits %>
+	<br> Generated in: <%= Time.now - time %>
