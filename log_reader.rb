@@ -5,7 +5,7 @@ require_relative 'log_parser'
 require_relative 'log_database'
 require_relative 'output_filter'
 
-db   = Database.new
+db = Database.new
 data_types = %w( user_agent ip code path method referer )
 
 before { @time = Time.now }
@@ -27,3 +27,4 @@ get '/:stats' do
 
   erb :index, :locals => { stats: stats, data_types: data_types, db: db, time: @time }
 end
+
